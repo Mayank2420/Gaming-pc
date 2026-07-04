@@ -71,7 +71,10 @@ auth.onAuthStateChanged((user) => {
     console.log("User logged in:", user.email);
 
     loginScreen.hidden = true;
+    loginScreen.style.display = "none";
+
     adminDashboard.hidden = false;
+    adminDashboard.style.display = "block";
     adminEmail.textContent = user.email;
 
     try {
@@ -84,7 +87,10 @@ auth.onAuthStateChanged((user) => {
     console.log("No user logged in");
 
     loginScreen.hidden = false;
-    adminDashboard.hidden = true;
+loginScreen.style.display = "flex";
+
+adminDashboard.hidden = true;
+adminDashboard.style.display = "none";
   }
 });
 

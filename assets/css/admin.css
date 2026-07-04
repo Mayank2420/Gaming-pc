@@ -82,3 +82,6 @@
 #bulkConfirmBtn{ margin-top:20px; }
 
 .form-status{ font-size:0.85rem; min-height:20px; color:var(--emerald); }
+[hidden] {
+    display: none !important;
+}

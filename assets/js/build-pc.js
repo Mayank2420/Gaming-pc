@@ -28,10 +28,14 @@ const quoteBtn = document.getElementById("quoteBtn");
 
 function renderSlots() {
   slotsContainer.innerHTML = SLOTS.map(slot => {
-    const options = allProducts.filter(p =>
-      slot.categories.includes(p.category) &&
-      (slot.match.test(p.name || "") || slot.match.source === ".*")
-    );
+    const options = allProducts.filter(p => {
+  const matchCategory = slot.categories.includes(p.category);
+
+  const matchName =
+    slot.match.source === ".*" ? true : slot.match.test(p.name || "");
+
+  return matchCategory && matchName;
+});
     const optionTags = options.map(p =>
       `<option value="${p.id}">${p.name} — ₹${(p.price || 0).toLocaleString("en-IN")}</option>`
     ).join("");

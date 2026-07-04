@@ -25,18 +25,41 @@ const adminEmail = document.getElementById("adminEmail");
 
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const data = new FormData(loginForm);
+
   loginStatus.textContent = "Signing in...";
 
+  console.log("Before Login");
+
   try {
-    await auth.signInWithEmailAndPassword(
+
+    const userCredential = await auth.signInWithEmailAndPassword(
       data.get("email"),
       data.get("password")
     );
+
+    console.log("After Login");
+    console.log(userCredential);
+
+    loginStatus.textContent = "Login Successful";
+
+    loginScreen.hidden = true;
+    adminDashboard.hidden = false;
+    adminEmail.textContent = userCredential.user.email;
+
+    initDashboard();
+
   } catch (err) {
+
     console.error(err);
-    loginStatus.textContent = `${err.code}: ${err.message}`;
+
+    loginStatus.textContent = err.code + " : " + err.message;
+
+    alert(err.code);
+
   }
+
 });
 
 logoutBtn.addEventListener("click", () => auth.signOut());

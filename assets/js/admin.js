@@ -42,12 +42,24 @@ loginForm.addEventListener("submit", async (e) => {
 logoutBtn.addEventListener("click", () => auth.signOut());
 
 auth.onAuthStateChanged((user) => {
+  console.log("Auth state changed:", user);
+
   if (user) {
+    console.log("User logged in:", user.email);
+
     loginScreen.hidden = true;
     adminDashboard.hidden = false;
     adminEmail.textContent = user.email;
-    initDashboard();
+
+    try {
+      initDashboard();
+      console.log("Dashboard initialized");
+    } catch (e) {
+      console.error("initDashboard failed:", e);
+    }
   } else {
+    console.log("No user logged in");
+
     loginScreen.hidden = false;
     adminDashboard.hidden = true;
   }

@@ -93,5 +93,8 @@ quoteBtn.addEventListener("click", () => {
 
 db.collection(PRODUCTS_COLLECTION).onSnapshot((snapshot) => {
   allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+  console.log("🔥 PRODUCTS FROM FIREBASE:", allProducts); // ADD THIS
+
   renderSlots();
-}, (err) => console.error("Failed to load components:", err));
+});

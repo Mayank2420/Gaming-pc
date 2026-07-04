@@ -26,11 +26,16 @@ const adminEmail = document.getElementById("adminEmail");
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const data = new FormData(loginForm);
-  loginStatus.textContent = "Signing in…";
+  loginStatus.textContent = "Signing in...";
+
   try {
-    await auth.signInWithEmailAndPassword(data.get("email"), data.get("password"));
+    await auth.signInWithEmailAndPassword(
+      data.get("email"),
+      data.get("password")
+    );
   } catch (err) {
-    loginStatus.textContent = "Incorrect email or password.";
+    console.error(err);
+    loginStatus.textContent = `${err.code}: ${err.message}`;
   }
 });
 
